@@ -1,19 +1,25 @@
 const API_KEY = '778b3059319413934e250574f3d9c2c4';
 
-export async function fetchWeather(city) {
-    try {
-        const response = await fetch (
-           `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}` 
-        );
+const CURRENT_URL = "https://api.openweathermap.org/data/2.5/weather";
+const FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
-        if(!response.ok) {
-            throw new Error(`City not found: ${response.statusText}`);
-        }
+export async function fetchCurrent(city) {
+    const url = `${CURRENT_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=pl`;
 
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error("Failed to fetch weather data:", error);
-        return null;
-      }
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error("The city was not found.")
+    }
+    return response.json();
+}
+
+export async function  fetchForecast(city) {
+    const url = `${FORECAST_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=pl`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+        throw new Error("Could not get the forecast.");
+    }
+    return response.json();
+    
 }

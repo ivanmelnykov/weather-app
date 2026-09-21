@@ -2,15 +2,32 @@
 <html lang="en">
 <head>
     <script type="module" src="js/app.js"></script>
-    <link rel stylesheet="style.css">
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather Client</title>
 </head>
 <body>
     
-    <input type="text">
-    <button class ="search-button"> Check the weather </button> 
-    <div class = "weather-info"> </div>
+    <main class="app">
+        <section class="panel glass">
+            <h1 class="title">Weather Pulse</h1>
+            <p class="subtitle"> Check the current weather and a 5-day forecast</p>
+
+            <div class="search-row">
+                <input id="cityInput" type="text" placeholder="Enter the city " />
+                <button id="checkBtn" aria-label="Check the weather">Weather</button>
+
+            </div>
+
+            <div id="status" class="status"></div>
+
+        </section>
+
+        <section class="results">
+            <div id="currentBox" class="result-block"></div>
+            <div id="forecastBox"class="result-block"></div>
+        </section>
+        </main>
 </body>
 </html>
