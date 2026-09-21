@@ -1,87 +1,186 @@
 :root {
-  --bg-main: #0d1117;
-  --bg-card: #161b22;
-  --bg-row: #1f242c;
-  --border-color: #30363d;
-  --text-main: #c9d1d9;
+  --bg-main: #0b0f19;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --error: #ef4444;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
   min-height: 100vh;
   margin: 0;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-.weather-container {
-  background-color: var(--bg-card);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  width: 400px;
+
+.container {
+  background-color: var(--bg-panel);
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .search-box {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 input {
   flex: 1;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
+  padding: 12px 16px;
   background-color: var(--bg-main);
-  color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 1rem;
   outline: none;
+  transition: border-color 0.2s;
 }
 
-.search-button {
-  padding: 10px 15px;
-  background-color: #1f6feb;
+input:focus {
+  border-color: var(--accent);
+}
+
+button {
+  padding: 12px 20px;
+  background-color: var(--accent);
   color: white;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.search-button:hover {
-  background-color: #388bfd;
-}
-
-.weather-info, .forecast-section {
-  background-color: var(--bg-row);
-  padding: 12px;
   border-radius: 8px;
-  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.forecast-container {
+button:hover {
+  background-color: var(--accent-hover);
+}
+
+
+.status {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  min-height: 20px;
+}
+
+.status.error {
+  color: var(--error);
+}
+
+
+.block-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+
+.card.glass {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card.glass:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon-wrap {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.icon-wrap img {
+  width: 40px;
+  height: 40px;
+}
+
+.meta {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-height: 250px;
-  overflow-y: auto;
-  margin-top: 10px;
+  gap: 4px;
+}
+
+.meta .time {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.meta .desc {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.temp {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.temp .main {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.temp .feels {
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 
-.forecast-row {
-  background-color: var(--bg-main);
-  border: 1px solid var(--border-color);
-  padding: 8px 12px;
-  border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
+#forecastBox {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+
+#forecastBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+#forecastBox::-webkit-scrollbar-track {
+  background: var(--bg-main);
+  border-radius: 4px;
+}
+
+#forecastBox::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
 }
